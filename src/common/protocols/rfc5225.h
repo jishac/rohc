@@ -354,6 +354,56 @@ typedef struct
 
 
 /************************************************************************
+ * Compressed RTP header                                                *
+ ************************************************************************/
+
+/**
+ * @brief The RTP static part
+ *
+ * See RFC5225 page 65
+ */
+typedef struct
+{
+	uint32_t ssrc; /**<  */
+} __attribute__((packed)) rtp_static_t;
+
+
+/**
+ * @brief The RTP dynamic part
+ *
+ * See RFC5225 page 65
+ */
+typedef struct
+{
+#if WORDS_BIGENDIAN == 1
+	uint8_t reserved:1;
+	uint8_t reorder_ratio:2;
+	uint8_t list_present:1;
+	uint8_t tss_indicator:1;
+	uint8_t tis_indicator:1;
+	uint8_t pad_bit:1;
+	uint8_t extension:2;
+	uint8_t marker:1;
+	uint8_t paytload_type:7;
+	uint16_t sequence_number;
+	uint32_t timestamp;
+#else
+	uint8_t extension:2;
+	uint8_t pad_bit:1;
+	uint8_t tis_indicator:1;
+	uint8_t tss_indicator:1;
+	uint8_t list_present:1;
+	uint8_t reorder_ratio:2;
+	uint8_t reserved:1;
+	uint8_t paytload_type:7;
+	uint8_t marker:1;
+	uint16_t sequence_number;
+	uint32_t timestamp;
+#endif
+} __attribute__((packed)) rtp_dynamic_t;
+
+
+/************************************************************************
  * Compressed packet formats                                            *
  ************************************************************************/
 

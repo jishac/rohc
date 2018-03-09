@@ -79,7 +79,7 @@ extern const struct rohc_comp_profile c_uncompressed_profile;
 extern const struct rohc_comp_profile rohc_comp_rfc5225_ip_profile;
 extern const struct rohc_comp_profile rohc_comp_rfc5225_ip_udp_profile;
 extern const struct rohc_comp_profile rohc_comp_rfc5225_ip_esp_profile;
-
+extern const struct rohc_comp_profile rohc_comp_rfc5225_ip_udp_rtp_profile;
 
 /**
  * @brief The compression parts of the ROHC profiles.
@@ -90,8 +90,8 @@ extern const struct rohc_comp_profile rohc_comp_rfc5225_ip_esp_profile;
 static const struct rohc_comp_profile *const rohc_comp_profiles[C_NUM_PROFILES] =
 {
 	&c_rtp_profile,
-#if 0
 	&rohc_comp_rfc5225_ip_udp_rtp_profile,
+#if 0
 	&rohc_comp_rfc5225_ip_udplite_rtp_profile,
 #endif
 	&c_udp_profile,  /* must be declared after RTP profiles */
